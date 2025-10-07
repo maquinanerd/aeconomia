@@ -60,6 +60,8 @@ class WordPressClient:
                     return int(item['id'])
         except requests.RequestException as e:
             logger.error(f"Error searching for tag '{name}': {e}")
+            if e.response is not None:
+                self._log_wp_response(e.response)
         
         return None
 
@@ -139,6 +141,8 @@ class WordPressClient:
                     return int(item['id'])
         except requests.RequestException as e:
             logger.error(f"Error searching for category '{name}': {e}")
+            if e.response is not None:
+                self._log_wp_response(e.response)
         
         return None
 
@@ -228,6 +232,8 @@ class WordPressClient:
             except Exception as e:
                 last_err = e
                 logger.error(f"Upload of '{image_url}' failed with non-retriable error: {e}")
+                if hasattr(e, 'response') and e.response is not None:
+                    self._log_wp_response(e.response)
                 break # Don't retry on WP errors (4xx, 5xx) or other issues
 
         logger.error(f"Final failure to upload image '{image_url}' after {attempt} attempt(s): {last_err}")
@@ -263,6 +269,8 @@ class WordPressClient:
             return [{"title": i.get("title", ""), "url": i.get("_embedded", {}).get("self", [{}])[0].get("link", "")} for i in resp.json()]
         except requests.RequestException as e:
             logger.error(f"Error searching for related posts with term '{term}': {e}")
+            if e.response is not None:
+                self._log_wp_response(e.response)
             return []
 
     def _log_wp_response(self, resp):
@@ -426,6 +434,8 @@ class WordPressClient:
                     tag_map[tag['id']] = tag['name']
             except requests.RequestException as e:
                 logger.error(f"Error fetching tag details: {e}")
+                if e.response is not None:
+                    self._log_wp_response(e.response)
                 # Continue to next chunk even if one fails
                 continue
         
