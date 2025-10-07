@@ -4,6 +4,7 @@ Handles content rewriting using a Generative AI model with API key failover.
 """
 import json
 import logging
+import random
 from urllib.parse import urlparse
 import time
 from pathlib import Path 
@@ -107,8 +108,8 @@ class AIProcessor:
         """
         from google.api_core.exceptions import ResourceExhausted
 
-        MAX_RETRIES = 3
-        BACKOFF_FACTOR = 60  # seconds
+        MAX_RETRIES = 4
+        INITIAL_BACKOFF = 4  # seconds
 
         prompt_template = self._load_prompt_template()
 
@@ -173,8 +174,9 @@ class AIProcessor:
                         logger.warning(f"Rate limit exhausted for key index {self.current_key_index} after {MAX_RETRIES} retries. Failing over.")
                         break  # Break inner loop to failover to the next key
 
-                    wait_time = BACKOFF_FACTOR * (2 ** (retries - 1))
-                    logger.warning(f"Rate limit hit (429). Waiting for {wait_time}s before retry {retries}/{MAX_RETRIES}.")
+                    # Exponential backoff with jitter
+                    wait_time = INITIAL_BACKOFF * (2 ** (retries - 1)) + random.uniform(0, 1)
+                    logger.warning(f"Rate limit hit (429). Waiting for {wait_time:.2f}s before retry {retries}/{MAX_RETRIES}.")
                     time.sleep(wait_time)
 
                 except Exception as e:
