@@ -177,6 +177,7 @@ def run_pipeline_cycle():
                                 break
 
                         extracted_data = extractor.extract(str(soup), url=article_url_to_process)
+                        logger.info(f"Extracted data for {article_url_to_process}: {json.dumps(extracted_data, indent=2, ensure_ascii=False)}") # DEBUG LOG
                         if not extracted_data or not extracted_data.get('content'):
                             logger.warning(f"Failed to extract content from {article_data['url']}")
                             db.update_article_status(article_db_id, 'FAILED', reason="Extraction failed")
@@ -237,12 +238,17 @@ def run_pipeline_cycle():
                         featured_image_to_upload = None
                         original_featured_url = extracted_data.get('featured_image_url')
                         DEFAULT_FALLBACK_IMAGE_URL = "https://aeconomia.news/wp-content/uploads/2025/10/Business-Success.jpg"
+                        VALOR_LOGO_URL = "https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png"
 
-                        if original_featured_url and is_valid_upload_candidate(original_featured_url):
+                        # Check for the specific Valor logo URL first
+                        if original_featured_url == VALOR_LOGO_URL:
+                            logger.info("Valor default logo detected. Using fallback image.")
+                            featured_image_to_upload = DEFAULT_FALLBACK_IMAGE_URL
+                        elif original_featured_url and is_valid_upload_candidate(original_featured_url):
                             featured_image_to_upload = original_featured_url
                             logger.info(f"Valid featured image found, preparing for upload: {featured_image_to_upload}")
                         else:
-                            logger.info("No valid featured image found. Using default fallback image.")
+                            logger.info("No valid featured image found or image is invalid. Using default fallback image.")
                             featured_image_to_upload = DEFAULT_FALLBACK_IMAGE_URL
 
                         if featured_image_to_upload:

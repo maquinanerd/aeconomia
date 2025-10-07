@@ -1,0 +1,41 @@
+{
+  "titulo_final": "Ações de Tecnologia Pressionam Bolsas de NY em Queda",
+  "conteudo_final": "<p>As principais bolsas de valores de Nova York fecharam em queda nesta terça-feira (7), com o setor de tecnologia e comunicação liderando as perdas. A notícia de que a receita da Oracle com serviços de nuvem ficou aquém das expectativas de analistas, além de prejuízos em alguns contratos de aluguel de chips da Nvidia, impactou negativamente o mercado.</p><p>No fechamento, o índice <b>Dow Jones</b> caiu 0,20%, alcançando 46.602,98 pontos. O <b>S&P 500</b> recuou 0,38%, fechando em 6.714,59 pontos, enquanto o <b>Nasdaq</b> registrou uma queda de 0,67%, terminando o dia em 22.788,363 pontos.</p><figure><img src=\"https://s2-valor.glbimg.com/KHLs0h6J1DbN79L6wiLLSpEvEK4=/0x0:4000x2668/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2023/a/6/0bzu3gSgOiJVKdjyplqA/396984933.jpg\" alt=\"Gráfico de desempenho das bolsas de Nova York com destaque para a queda de ações de tecnologia.\"><figcaption>Índices de Nova York operam em baixa, com tecnologia puxando os números para baixo.</figcaption></figure><h2>Impacto nos Setores</h2><p>O setor de comunicação (-0,73%) e o de tecnologia (-0,52%) foram os que mais sofreram perdas no dia. Em contrapartida, setores como itens básicos de consumo (+0,86%) e serviços públicos (+0,42%) apresentaram as maiores altas, mostrando uma divisão no desempenho do mercado.</p><h2>Ações da Oracle e o Mercado de Chips</h2><p>As ações da <b>Oracle</b>, que tem sido destaque no desenvolvimento de inteligência artificial, fecharam em queda de 2,41%. O jornal The Information reportou que a empresa tem enfrentado margens menores em seu negócio de computação em nuvem e prejuízos em contratos de aluguel de chips da <b>Nvidia</b>. Essa notícia afetou não apenas a Oracle, mas também outras fabricantes de chips e semicondutores, que figuraram entre as maiores perdas do índice Nasdaq.</p><h2>Contexto do Fed e Paralisação Governamental</h2><p>Embora os investidores tenham acompanhado os discursos de dirigentes do <b>Federal Reserve (Fed)</b> ao longo do dia, as declarações tiveram pouca influência nos preços dos ativos. O mercado também segue atento ao sétimo dia de paralisação ("shutdown") do governo americano, um fator que adiciona incerteza ao cenário econômico.</p>",
+  "meta_description": "Bolsas de NY caem com ações de tecnologia e comunicação pressionadas. Oracle e Nvidia em foco após notícias de receita e margens.",
+  "focus_keyphrase": "Ações de tecnologia",
+  "related_keyphrases": [
+    "bolsas de Nova York",
+    "queda na Nasdaq",
+    "Oracle e Nvidia"
+  ],
+  "slug": "acoes-tecnologia-pressionam-bolsas-ny",
+  "categorias": [
+    {
+      "nome": "Mercados"
+    },
+    {
+      "nome": "Finanças"
+    },
+    {
+      "nome": "Tecnologia"
+    }
+  ],
+  "image_alt_texts": {
+    "396984933.jpg": "Gráfico de desempenho das bolsas de Nova York com destaque para a queda de ações de tecnologia, impactando índices como Dow Jones e Nasdaq."
+  },
+  "tags_sugeridas": [
+    "Nasdaq",
+    "S&P 500",
+    "Dow Jones",
+    "Oracle",
+    "Nvidia",
+    "Federal Reserve",
+    "Shutdown EUA"
+  ],
+  "yoast_meta": {
+    "_yoast_wpseo_title": "Ações de Tecnologia Pressionam Bolsas de NY em Queda | Mercados",
+    "_yoast_wpseo_metadesc": "Bolsas de NY caem com ações de tecnologia e comunicação pressionadas. Oracle e Nvidia em foco após notícias de receita e margens.",
+    "_yoast_wpseo_focuskw": "Ações de tecnologia",
+    "_yoast_news_keywords": "ações de tecnologia, bolsas de Nova York, Oracle, Nvidia, Nasdaq, S&P 500, Dow Jones"
+  }
+}
