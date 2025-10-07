@@ -239,10 +239,14 @@ def run_pipeline_cycle():
                         original_featured_url = extracted_data.get('featured_image_url')
                         DEFAULT_FALLBACK_IMAGE_URL = "https://aeconomia.news/wp-content/uploads/2025/10/Business-Success.jpg"
                         VALOR_LOGO_URL = "https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png"
+                        G1_LOGO_URL = "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1"
 
                         # Check for the specific Valor logo URL first
                         if original_featured_url == VALOR_LOGO_URL:
                             logger.info("Valor default logo detected. Using fallback image.")
+                            featured_image_to_upload = DEFAULT_FALLBACK_IMAGE_URL
+                        elif original_featured_url == G1_LOGO_URL:
+                            logger.info("G1 default logo detected. Using fallback image.")
                             featured_image_to_upload = DEFAULT_FALLBACK_IMAGE_URL
                         elif original_featured_url and is_valid_upload_candidate(original_featured_url):
                             featured_image_to_upload = original_featured_url
