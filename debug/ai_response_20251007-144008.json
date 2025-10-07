@@ -1,0 +1,31 @@
+{
+  "titulo_final": "OpenAI busca chip da AMD e pode adquirir 10% da fabricante",
+  "conteudo_final": "<p>A <a href=\"https://aeconomia.news/tag/openai\">OpenAI</a> fechou um acordo para adquirir bilhões de dólares em chips da <a href=\"https://aeconomia.news/tag/amd\">AMD</a>. O pacto, que visa expandir a capacidade computacional da criadora do ChatGPT, também pode resultar na aquisição de cerca de 10% da fabricante de semicondutores pela startup de <a href=\"https://aeconomia.news/tag/inteligencia-artificial\">inteligência artificial</a> ao longo do tempo.</p><p>A OpenAI concordou em comprar processadores com um consumo total de energia de 6 gigawatts (GWs), quantidade comparável à demanda média de Singapura. Embora o valor total da transação não tenha sido divulgado, estimativas internas da OpenAI indicam que 1 GW de capacidade custa aproximadamente US$ 50 bilhões para ser ativado, sendo dois terços desse valor destinados a chips e infraestrutura de suporte.</p><h2>Mercado de IA: uma corrida por infraestrutura</h2><p>Este acordo surge poucas semanas após a rival da AMD, Nvidia, anunciar um investimento de US$ 100 bilhões na OpenAI, com o objetivo de implantar 10 GW de nova capacidade em data centers. A AMD, por sua vez, emitiu à OpenAI um warrant para adquirir até 160 milhões de ações a US$ 0,01 cada, condicionado ao atingimento de metas de preço das ações e à implantação dos chips da AMD pela OpenAI. Essa participação potencial equivale a cerca de 10% da empresa.</p><figure><img src=\"https://f.i.uol.com.br/fotografia/2025/01/27/17380122446797f654aa8b5_1738012244_3x2_md.jpg\" alt=\"Gráfico mostrando a demanda por chips de inteligência artificial no mercado.\"><figcaption>A demanda por chips de IA tem impulsionado parcerias estratégicas.</figcaption></figure><p>As ações da AMD reagiram positivamente à notícia, chegando a subir 34% e atingindo o maior valor em mais de um ano, em US$ 226,71. A transação reforça a estratégia da OpenAI de acelerar o desenvolvimento de data centers para treinar e operar seus modelos de IA, consolidando sua posição na vanguarda da tecnologia.</p><h2>AMD busca alternativa à Nvidia</h2><p>“Esta parceria é um grande passo na construção da capacidade computacional necessária para realizar o potencial completo da IA”, afirmou Sam Altman, CEO da OpenAI. Contudo, críticos levantam preocupações sobre a sustentabilidade financeira e o modelo de financiamento dos data centers de IA, dada a magnitude dos investimentos.</p><p>A AMD tem se empenhado em se consolidar como uma alternativa viável aos processadores e softwares da Nvidia para IA, buscando reduzir a liderança tecnológica da concorrente e atrair clientes importantes como Microsoft e Meta. O acordo com a OpenAI compromete a compra do MI450, o chip de IA mais avançado da AMD, projetado para competir com os produtos Blackwell da Nvidia.</p><figure><img src=\"https://f.i.uol.com.br/fotografia/2025/08/21/175581635968a7a1a750bec_1755816359_3x2_md.jpg\" alt=\"O CEO da AMD, Lisa Su, em evento da empresa.\"><figcaption>A AMD busca expandir sua participação no mercado de IA.</figcaption></figure><h2>Investimentos massivos em infraestrutura de IA</h2><p>Sam Altman destacou que a demanda por poder computacional em IA supera a capacidade atual, impulsionando a busca por novas infraestruturas. A OpenAI já se comprometeu a adquirir US$ 300 bilhões em poder computacional da Oracle nos próximos cinco anos e está colaborando com a Oracle, SoftBank e outros parceiros para construir data centers nos EUA com demanda adicional de 7 GW. Adicionalmente, a empresa está desenvolvendo seus próprios chips de IA em parceria com a Broadcom.</p><p>Ao todo, esses acordos preveem o uso de 23 GW de nova capacidade, com um custo estimado de desenvolvimento superior a US$ 1 trilhão. Desde o lançamento do ChatGPT em 2022, a receita da OpenAI cresceu para cerca de US$ 13 bilhões anuais. No entanto, a empresa ainda opera com prejuízo devido aos altos custos de desenvolvimento, marketing e contratações.</p><p>Os acordos recentes são de longo prazo e pagos em parcelas como despesas operacionais, mitigando a necessidade de desembolso inicial massivo. A OpenAI planeja diversificar suas fontes de receita, incluindo um novo recurso de compras e um dispositivo de IA em desenvolvimento com Jony Ive. A empresa busca apoio financeiro de parceiros e do mercado de dívida para atender às suas crescentes necessidades energéticas.</p>",
+  "meta_description": "OpenAI e AMD firmam acordo estratégico de chips. Startup pode adquirir 10% da fabricante em movimento que visa expandir capacidade de IA.",
+  "focus_keyphrase": "OpenAI e AMD",
+  "related_keyphrases": [
+    "acordo de chips OpenAI",
+    "participação AMD OpenAI",
+    "futuro da IA e semicondutores"
+  ],
+  "slug": "openai-amd-acordo-chips-ia",
+  "image_alt_texts": {
+    "17380122446797f654aa8b5_1738012244_3x2_md.jpg": "Gráfico mostrando a demanda por chips de inteligência artificial no mercado.",
+    "175581635968a7a1a750bec_1755816359_3x2_md.jpg": "A AMD busca expandir sua participação no mercado de IA com novos chips."
+  },
+  "tags_sugeridas": [
+    "OpenAI",
+    "AMD",
+    "Inteligência Artificial",
+    "Chips",
+    "Sam Altman",
+    "Mercado de tecnologia",
+    "Data Centers"
+  ],
+  "yoast_meta": {
+    "_yoast_wpseo_title": "OpenAI e AMD: acordo de chips pode render 10% de participação à startup",
+    "_yoast_wpseo_metadesc": "OpenAI e AMD firmam acordo estratégico de chips. Startup pode adquirir 10% da fabricante em movimento que visa expandir capacidade de IA.",
+    "_yoast_wpseo_focuskw": "OpenAI e AMD",
+    "_yoast_news_keywords": "OpenAI, AMD, Inteligência Artificial, Chips, Sam Altman, Mercado de tecnologia, Data Centers"
+  }
+}

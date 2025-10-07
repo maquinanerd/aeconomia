@@ -11,6 +11,10 @@ Use a seguinte estrutura JSON para a sua resposta:
   "focus_keyphrase": "A frase-chave principal vai aqui",
   "related_keyphrases": ["variação da palavra-chave", "sinônimo da keyword", "pergunta relacionada"],
   "slug": "url-amigavel-para-o-post",
+  "categorias": [
+      {"nome": "Nome da Categoria Principal"},
+      {"nome": "Nome da Categoria Secundária"}
+  ],
   "image_alt_texts": {
     "nome-original-da-imagem.jpg": "Texto alternativo para a imagem 1, com a palavra-chave.",
     "outra-imagem.png": "Descrição da imagem 2, útil para acessibilidade e SEO."
@@ -90,18 +94,24 @@ DETALHES PARA CADA CAMPO DO JSON
 - Crie uma URL amigável (slug) para o post, com no máximo 5 palavras, separadas por hífens.
 - Exemplo: `copom-mantem-selic-10-50`.
 
-7. **image_alt_texts** (Opcional)
+7. **categorias**
+- Sugira de 2 a 4 categorias relevantes para o artigo.
+- A primeira deve ser a mais importante (ex: "Mercado Financeiro", "Eleições 2026").
+- As outras devem ser mais específicas (ex: "Renda Fixa", "Câmara dos Deputados", "Guerra na Ucrânia").
+- Use categorias que já existem no site se possível, como "Economia", "Política", "Mundo", "Mercados".
+
+8. **image_alt_texts** (Opcional)
 - Crie um texto alternativo (alt text) para as imagens principais.
 - A chave do objeto deve ser o NOME DO ARQUIVO da imagem (ex: `petrobras-anuncio-lucro.jpg`).
 - O valor deve ser uma descrição concisa que incluía a frase-chave principal.
 - Exemplo: `"petrobras-anuncio-lucro.jpg": "Gráfico mostrando o lucro da Petrobras no último trimestre, relacionado ao resultado da empresa."`
 
-8. **tags_sugeridas**
+9. **tags_sugeridas**
 - Extraia de 5 a 7 tags específicas e relevantes.
 - NÃO USE TAGS GENÉRICAS como "economia", "política" ou "notícia".
 - Use nomes próprios, indicadores, empresas, etc. (ex: "Roberto Campos Neto", "IPCA", "Petrobras", "PL das Fake News", "STF").
 
-9. **yoast_meta**
+10. **yoast_meta**
 - **_yoast_wpseo_title**: Crie um título para o Google com no máximo 65 caracteres. Pode ser uma variação do `titulo_final`, mas ainda mais focado em busca.
 - **_yoast_wpseo_metadesc**: Crie uma meta description para o Google com no máximo 155 caracteres. Deve ser idêntica ou uma leve melhoria do campo `meta_description`.
 - **_yoast_wpseo_focuskw**: A frase-chave principal do artigo. Deve ser idêntica ao campo `focus_keyphrase`.

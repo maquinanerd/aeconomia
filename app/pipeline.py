@@ -229,12 +229,19 @@ def run_pipeline_cycle():
                         
                         # 3.3: Upload ONLY the featured image if it's valid
                         urls_to_upload = []
-                        featured_image_url = extracted_data.get('featured_image_url')
-                        if featured_image_url and is_valid_upload_candidate(featured_image_url):
-                            urls_to_upload.append(featured_image_url)
-                            logger.info(f"Valid featured image found, preparing for upload: {featured_image_url}")
+                        featured_image_to_upload = None
+                        original_featured_url = extracted_data.get('featured_image_url')
+                        DEFAULT_FALLBACK_IMAGE_URL = "https://aeconomia.news/wp-content/uploads/2025/10/Business-Success.jpg"
+
+                        if original_featured_url and is_valid_upload_candidate(original_featured_url):
+                            featured_image_to_upload = original_featured_url
+                            logger.info(f"Valid featured image found, preparing for upload: {featured_image_to_upload}")
                         else:
-                            logger.info("No valid featured image to upload. The post will not have a highlight.")
+                            logger.info("No valid featured image found. Using default fallback image.")
+                            featured_image_to_upload = DEFAULT_FALLBACK_IMAGE_URL
+
+                        if featured_image_to_upload:
+                            urls_to_upload.append(featured_image_to_upload)
 
                         uploaded_src_map = {}
                         uploaded_id_map = {}
@@ -242,7 +249,6 @@ def run_pipeline_cycle():
                         for url in urls_to_upload:
                             media = wp_client.upload_media_from_url(url, title)
                             if media and media.get("source_url") and media.get("id"):
-                                # Normalize URL to handle potential trailing slashes as keys
                                 k = url.rstrip('/')
                                 uploaded_src_map[k] = media["source_url"]
                                 uploaded_id_map[k] = media["id"]
@@ -264,7 +270,7 @@ def run_pipeline_cycle():
                         # Step 5: Prepare payload for WordPress
 
                         # 5.1: Combine fixed and AI-suggested categories
-                        FIXED_CATEGORY_IDS = {8, 267} # Futebol, Notícias
+                        FIXED_CATEGORY_IDS = {1} # Notícias
                         
                         final_category_ids = set(FIXED_CATEGORY_IDS)
 
@@ -276,7 +282,6 @@ def run_pipeline_cycle():
                         # Get AI suggested categories
                         suggested_categories = rewritten_data.get('categorias', [])
                         if suggested_categories and isinstance(suggested_categories, list):
-                            # Expects a list of dicts like [{'nome': 'Barcelona'}, {'nome': 'Champions League'}]
                             suggested_names = [cat['nome'] for cat in suggested_categories if isinstance(cat, dict) and 'nome' in cat]
                             
                             # Normalize category names using aliases
@@ -303,14 +308,14 @@ def run_pipeline_cycle():
                                 current_post_categories=list(final_category_ids)
                             )
 
-                        # 5.2: Determine featured media ID to avoid re-upload
+                        # 5.2: Determine featured media ID
                         featured_media_id = None
-                        if featured_url := extracted_data.get('featured_image_url'):
-                            k = featured_url.rstrip('/')
+                        if featured_image_to_upload:
+                            k = featured_image_to_upload.rstrip('/')
                             featured_media_id = uploaded_id_map.get(k)
-                        else:
-                            logger.info("No suitable featured image found after filtering; proceeding without one.")
+
                         if not featured_media_id and uploaded_id_map:
+                            logger.warning("Could not find the intended featured image in the uploaded map. Using the first available image as a fallback.")
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
                         # 5.3: Set alt text for uploaded images

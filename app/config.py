@@ -170,12 +170,13 @@ PILAR_POSTS: List[str] = [
 
 # IDs das categorias no WordPress (ajuste os IDs conforme o seu WP)
 WORDPRESS_CATEGORIES: Dict[str, int] = {
-    'economia': 0, # TODO: Substitua 0 pelo ID correto da categoria
-    'politica': 0, # TODO: Substitua 0 pelo ID correto da categoria
-    'mercados': 0, # TODO: Substitua 0 pelo ID correto da categoria
-    'internacional': 0, # TODO: Substitua 0 pelo ID correto da categoria
-    # Categorias genéricas
     'Notícias': 1,
+    'economia': 132,
+    'empreendedorismo': 134,
+    'financas': 133,
+    'mercados': 136,
+    'mundo': 137,
+    'politica': 135,
 }
 
 # --- Sinônimos de Categorias ---
