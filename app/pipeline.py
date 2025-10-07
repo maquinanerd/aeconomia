@@ -51,7 +51,7 @@ def _get_article_url(article_data: Dict[str, Any]) -> Optional[str]:
         return None
     try:
         p = urlparse(url)
-        if p.scheme in ("http", "https"):
+        if p.scheme in ("http", "https"): 
             return url
     except Exception:
         return None

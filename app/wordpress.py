@@ -265,40 +265,77 @@ class WordPressClient:
             logger.error(f"Error searching for related posts with term '{term}': {e}")
             return []
 
+    def _log_wp_response(self, resp):
+        ct = resp.headers.get("Content-Type", "")
+        body_preview = (resp.text or "")[:400].replace("\n", " ")
+        logger.error(f"[WP] status={resp.status_code} ct={ct} body[:400]={body_preview}")
+
+    def _log_wp_response(self, resp):
+        """Logs the WordPress API response, especially for non-JSON content."""
+        ct = resp.headers.get("Content-Type", "")
+        body_preview = (resp.text or "")[:400].replace("\n", " ")
+        logger.error(f"[WP] status={resp.status_code} ct={ct} body[:400]={body_preview}")
+
     def create_post(self, payload: Dict[str, Any]) -> Optional[int]:
-        """Creates a new post in WordPress."""
+        """Creates a new post in WordPress, including Yoast SEO metadata."""
+        # The pipeline now constructs the full payload, including the 'meta' block.
+        # This method is responsible for sending it and verifying the result.
+        
+        # First, ensure tags are resolved to IDs, as this is a client function.
+        if 'tags' in payload and payload['tags']:
+            payload['tags'] = self._ensure_tag_ids(payload['tags'])
+
+        posts_endpoint = f"{self.api_url}/posts"
+        payload.setdefault('status', 'publish')
+
         try:
-            # Resolve tag names to integer IDs before sending
-            if 'tags' in payload and payload['tags']:
-                payload['tags'] = self._ensure_tag_ids(payload['tags'])
+            logger.info(
+                "Sending post to WordPress: title_len=%d, content_len=%d, categories=%s, tags=%s",
+                len(payload.get('title', '')),
+                len(payload.get('content', '')),
+                payload.get('categories'),
+                payload.get('tags')
+            )
+            resp = self.session.post(posts_endpoint, json=payload, timeout=60)
 
-            posts_endpoint = f"{self.api_url}/posts"
-            payload.setdefault('status', 'publish')
+            # Handle errors + log non-JSON body
+            if resp.status_code not in (200, 201):
+                self._log_wp_response(resp)
+                resp.raise_for_status()  # Raise HTTPError for the calling function to handle
 
-            # Log a summary of the payload to avoid overly long logs
-            try:
-                logger.info(
-                    "WP payload: title_len=%d content_len=%d cat=%s tags=%s",
-                    len(payload.get('title', '')),
-                    len(payload.get('content', '')),
-                    payload.get('categories'),
-                    payload.get('tags')
-                )
-                if logger.isEnabledFor(logging.DEBUG):
-                    log_payload = json.dumps(payload, indent=2, ensure_ascii=False)
-                    logger.debug(f"Sending full payload to WordPress:\n{log_payload}")
-            except Exception as log_e:
-                logger.warning(f"Could not serialize payload for logging: {log_e}")
+            data = resp.json()
+            post_id = data.get("id")
+            if not post_id:
+                self._log_wp_response(resp)
+                logger.error("Post created, but no ID was returned in the response.")
+                return None
 
-            response = self.session.post(posts_endpoint, json=payload, timeout=60)
-            
-            if not response.ok:
-                logger.error(f"WordPress post creation failed with status {response.status_code}: {response.text}")
-                response.raise_for_status()
+            logger.info(f"Post {post_id} created successfully. Verifying meta fields.")
 
-            return response.json().get('id')
+            # Re-validation step to ensure meta fields were saved
+            yoast_meta = payload.get("meta", {})
+            if yoast_meta:
+                check_url = f"{self.api_url}/posts/{post_id}"
+                check = self.session.get(check_url, timeout=30)
+                if check.ok:
+                    meta = check.json().get("meta", {})
+                    missing = [k for k, v in yoast_meta.items() if v and meta.get(k) != v]
+                    if missing:
+                        logger.warning(f"Post {post_id}: Yoast meta fields were not saved correctly on initial POST: {missing}. Attempting update.")
+                        fix_resp = self.session.post(f"{self.api_url}/posts/{post_id}", json={"meta": yoast_meta}, timeout=60)
+                        if not fix_resp.ok:
+                            self._log_wp_response(fix_resp)
+                            logger.error(f"Failed to update missing meta for post {post_id}.")
+
+            return post_id
+
         except requests.RequestException as e:
-            logger.error(f"Failed to create WordPress post: {e}", exc_info=False)
+            logger.error(f"Failed to create WordPress post: {e}")
+            if e.response is not None:
+                self._log_wp_response(e.response)
+            return None
+        except Exception as e:
+            logger.error(f"An unexpected error occurred during post creation: {e}", exc_info=True)
             return None
 
     def get_published_posts(self, fields: List[str], max_posts: Optional[int] = None) -> List[Dict[str, Any]]:
