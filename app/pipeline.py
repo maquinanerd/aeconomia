@@ -81,6 +81,11 @@ def is_valid_upload_candidate(url: str) -> bool:
         # descarta imagens de avatar/author
         if "author" in lower_url or "avatar" in lower_url:
             return False
+
+        # descarta logos
+        if "logo" in lower_url:
+            logger.info(f"Rejecting image URL as it appears to be a logo: {url}")
+            return False
             
         # descarta imagens minúsculas (largura/altura <= 100 no querystring)
         dims = re.findall(r'[?&](?:w|width|h|height)=(\d+)', lower_url)
