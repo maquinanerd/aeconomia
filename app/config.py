@@ -7,52 +7,110 @@ load_dotenv()
 
 # --- Ordem de processamento dos feeds ---
 PIPELINE_ORDER: List[str] = [
-    'lance',
-    'globo_futebol',
-    'marca',
-    'as_es',
-    'cbs_nfl',
-    'cbs_nba',
-    'the_guardian_official',
+    'valor_financas',
+    'g1_economia',
+    'folha_mercado',
+    'estadao_economia',
+    'infomoney_economia',
+    'valor_politica',
+    'g1_politica',
+    'folha_poder',
+    'estadao_politica',
+    'infomoney_politica',
+    'infomoney_mercados',
+    'infomoney_onde_investir',
+    'bloomberg_markets',
+    'bloomberg_economics',
+    'nytimes_business',
+    'nytimes_economy',
 ]
 
 # --- Feeds RSS (padronizados, sem "synthetic_from") ---
 RSS_FEEDS: Dict[str, Dict[str, Any]] = {
-    'lance': {
-        'urls': ['https://aprenderpoker.site/feeds/lance/futebol/rss'],
-        'category': 'futebol',
-        'source_name': 'LANCE!',
-        'deny_regex': r'(?i)Onde Assistir',
+    # Economia
+    'valor_financas': {
+        'urls': ['https://aprenderpoker.site/feeds/valor/financas/rss'],
+        'category': 'economia',
+        'source_name': 'Valor Econômico',
     },
-    'globo_futebol': {
-        'urls': ['https://aprenderpoker.site/feeds/ge/futebol/rss'],
-        'category': 'futebol',
-        'source_name': 'Globo Esporte',
+    'g1_economia': {
+        'urls': ['https://aprenderpoker.site/feeds/g1/economia/rss'],
+        'category': 'economia',
+        'source_name': 'G1',
     },
-    'marca': {
-        'urls': ['https://aprenderpoker.site/feeds/marca/futbol/rss'],
-        'category': 'futebol-internacional',
-        'source_name': 'Marca',
+    'folha_mercado': {
+        'urls': ['https://aprenderpoker.site/feeds/folha/economia/rss'],
+        'category': 'economia',
+        'source_name': 'Folha de S.Paulo',
     },
-    'as_es': {
-        'urls': ['https://aprenderpoker.site/feeds/as_es/primera/rss'],
-        'category': 'futebol-internacional',
-        'source_name': 'AS España',
+    'estadao_economia': {
+        'urls': ['https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/'],
+        'category': 'economia',
+        'source_name': 'Estadão',
     },
-    'cbs_nfl': {
-        'urls': ['https://www.cbssports.com/rss/headlines/nfl/'],
-        'category': 'outros-esportes',
-        'source_name': 'CBS Sports',
+    'infomoney_economia': {
+        'urls': ['https://www.infomoney.com.br/economia/feed/'],
+        'category': 'economia',
+        'source_name': 'InfoMoney',
     },
-    'cbs_nba': {
-        'urls': ['https://www.cbssports.com/rss/headlines/nba/'],
-        'category': 'outros-esportes',
-        'source_name': 'CBS Sports',
+    # Política
+    'valor_politica': {
+        'urls': ['https://aprenderpoker.site/feeds/valor/politica/rss'],
+        'category': 'politica',
+        'source_name': 'Valor Econômico',
     },
-    'the_guardian_official': {
-        'urls': ['https://www.theguardian.com/football/rss'],
-        'category': 'futebol-internacional',
-        'source_name': 'The Guardian',
+    'g1_politica': {
+        'urls': ['https://aprenderpoker.site/feeds/g1/politica/rss'],
+        'category': 'politica',
+        'source_name': 'G1',
+    },
+    'folha_poder': {
+        'urls': ['https://aprenderpoker.site/feeds/folha/politica/rss'],
+        'category': 'politica',
+        'source_name': 'Folha de S.Paulo',
+    },
+    'estadao_politica': {
+        'urls': ['https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/'],
+        'category': 'politica',
+        'source_name': 'Estadão',
+    },
+    'infomoney_politica': {
+        'urls': ['https://www.infomoney.com.br/politica/feed/'],
+        'category': 'politica',
+        'source_name': 'InfoMoney',
+    },
+    # Mercados, Negócios e Investimentos
+    'infomoney_mercados': {
+        'urls': ['https://www.infomoney.com.br/mercados/feed/'],
+        'category': 'mercados',
+        'source_name': 'InfoMoney',
+    },
+    'infomoney_onde_investir': {
+        'urls': ['https://www.infomoney.com.br/onde-investir/feed/'],
+        'category': 'mercados',
+        'source_name': 'InfoMoney',
+    },
+    # Bloomberg
+    'bloomberg_markets': {
+        'urls': ['https://aprenderpoker.site/feeds/bloomberg/markets/rss'],
+        'category': 'internacional',
+        'source_name': 'Bloomberg',
+    },
+    'bloomberg_economics': {
+        'urls': ['https://aprenderpoker.site/feeds/bloomberg/economics/rss'],
+        'category': 'internacional',
+        'source_name': 'Bloomberg',
+    },
+    # The New York Times
+    'nytimes_business': {
+        'urls': ['https://rss.nytimes.com/services/xml/rss/nyt/Business.xml'],
+        'category': 'internacional',
+        'source_name': 'The New York Times',
+    },
+    'nytimes_economy': {
+        'urls': ['https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml'],
+        'category': 'internacional',
+        'source_name': 'The New York Times',
     },
 }
 
@@ -112,10 +170,10 @@ PILAR_POSTS: List[str] = [
 
 # IDs das categorias no WordPress (ajuste os IDs conforme o seu WP)
 WORDPRESS_CATEGORIES: Dict[str, int] = {
-    'futebol': 8,
-    'futebol-internacional': 9,
-    'outros-esportes': 10,
-    'la-liga': 0, # TODO: Substitua 0 pelo ID correto da categoria La Liga
+    'economia': 0, # TODO: Substitua 0 pelo ID correto da categoria
+    'politica': 0, # TODO: Substitua 0 pelo ID correto da categoria
+    'mercados': 0, # TODO: Substitua 0 pelo ID correto da categoria
+    'internacional': 0, # TODO: Substitua 0 pelo ID correto da categoria
     # Categorias genéricas
     'Notícias': 1,
 }
